@@ -1,4 +1,3 @@
-
 import streamlit as st
 from detection import detect_people
 from scipy.spatial import distance as dist
@@ -7,6 +6,8 @@ import imutils
 import cv2
 import os
 import datetime
+import wget
+
 
 st.title("Social Distancing Detector")
 st.subheader('A GUI Based Social Distancing Monitor System Using Yolo & OpenCV')
@@ -31,12 +32,14 @@ USE_GPU = bool(cuda)
 
 MIN_DISTANCE = 50
 
+file_url = 'https://pjreddie.com/media/files/yolov3.weights'
+file_name = wget.download(file_url)
 
 labelsPath = "yolo-coco/coco.names"
 LABELS = open(labelsPath).read().strip().split("\n")
 
-
-weightsPath = "yolo-coco/yolov3.weights"
+#weightsPath = "yolo-coco/yolov3.weights"
+weightsPath = file_name
 configPath = "yolo-coco/yolov3.cfg"
 
 
